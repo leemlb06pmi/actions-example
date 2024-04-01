@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: attempt
+      run: echo ${{ secrets.WHATEVER }} 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
