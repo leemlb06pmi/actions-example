@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: 
+      name: staging
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -28,6 +30,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: flask_app_sample
         IMAGE_TAG: latest
+      working-directory: app
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
@@ -38,10 +41,13 @@ jobs:
         terraform_version: 1.0.0
 
     - name: Terraform Init
+      working-directory: tf
       run: terraform init
 
     - name: Terraform Plan
+      working-directory: tf
       run: terraform plan
 
     - name: Terraform Apply
+      working-directory: tf
       run: terraform apply -auto-approve
