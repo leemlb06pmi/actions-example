@@ -4,13 +4,9 @@ on:
   push:
     branches:
       - main
-<<<<<<< HEAD
-
-=======
 permissions:
-        id-token: write # This is required for requesting the JWT  
-        contents: read
->>>>>>> main
+        id-token: write # This is required for requesting the JWT
+        contents: read  
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -19,15 +15,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: attempt
-      run: echo ${{ secrets.WHATEVER }} 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        role-to-assume: ${{ secrets.IAM_ROLE }}
+        role-session-name: AWSSession
         aws-region: us-east-1
-
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
