@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -52,3 +52,6 @@ jobs:
     - name: Terraform Apply
       working-directory: tf
       run: terraform apply -auto-approve
+    - name: Terraform Destroy
+      if: failure()
+      run: terraform destroy -auto-approve
