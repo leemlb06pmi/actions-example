@@ -23,7 +23,6 @@ resource "aws_instance" "ec2_instance" {
 }
 
 resource "aws_iam_role" "ec2_ecr_role" {
-    name = "ec2-to-ecr-allow-actions"
 
     assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -42,7 +41,6 @@ resource "aws_iam_role" "ec2_ecr_role" {
 
 # create instance profile, as a container for the iam role
 resource "aws_iam_instance_profile" "ec2_profile" {
- name = "ec2-to-ecr-instance-profile-actions"
  role = aws_iam_role.ec2_ecr_role.name
 }
 

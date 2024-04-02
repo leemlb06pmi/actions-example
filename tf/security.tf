@@ -1,5 +1,4 @@
 resource "aws_security_group" "http_backend_security" {
-  name = "backend security permissions actions"
   ingress {
     from_port   = 80
     to_port     = 80
@@ -9,7 +8,6 @@ resource "aws_security_group" "http_backend_security" {
 }
 
 resource "aws_security_group" "ssh_backend_security" {
-    name = "ssh permissions actions"
 
     ingress {
         cidr_blocks = [
