@@ -14,4 +14,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Goodbye
-      run: echo goodbye everyone.
+        run: echo goodbye everyone.
